@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "sheep-fish-task",
+    "name": "Sheep&Fish",
     "slug": "sheep-fish-task",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -12,16 +12,23 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.vladposhenko.sheepfish"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.vladposhenko.sheepfish"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "8c955dab-ccd4-4a31-82d7-2c4ab56d5f0b"
+      }
     }
   }
 }
