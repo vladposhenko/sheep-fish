@@ -4,10 +4,12 @@ import { IProductItem } from "../models";
 
 export interface AppState {
   products: IProductItem[]
+  isLoading: boolean
 }
 
 const initialState: AppState = {
   products: [],
+  isLoading: false
 };
 
 export const appSlice = createSlice({
@@ -15,8 +17,12 @@ export const appSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
+    builder.addCase(getProducts.pending, (state, action) => {
+      state.isLoading = true
+    })
     builder.addCase(getProducts.fulfilled, (state, action) => {
       state.products = action.payload;
+      state.isLoading = false
     })
     builder.addCase(addNewProduct.fulfilled, (state, action) => {
       state.products = action.payload

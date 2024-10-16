@@ -23,7 +23,7 @@ export type RootStackParamList = {
         Component: ProductDetails,
         options: {
           headerShown: true,
-          headerTitle: ' '
+          headerTitle: ''
         },
       },
       {

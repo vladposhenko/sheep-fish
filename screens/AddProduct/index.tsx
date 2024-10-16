@@ -1,20 +1,20 @@
-import { Text, Button } from "@ui-kitten/components";
-import { Image, StyleSheet, TextInput, View } from "react-native";
+import { Button } from "@ui-kitten/components";
+import { StyleSheet, View } from "react-native";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
-import { IProductItem } from "../../models";
-import { useRoute } from "@react-navigation/native";
 import { Formik } from "formik";
-import { validationSchema } from "./config";
+import { productsFormConfig, validationSchema } from "./config";
 import CustomTextInput from "../../components/ui/CustomTextInput";
-import { useState } from "react";
+import { FC, memo, useState } from "react";
 import { addNewProduct } from "../../store/appActions";
 import { Products } from "../../constants/routes";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { RootStackParamList } from "../../constants/screens";
 
-type IProps = {
-  item: IProductItem;
-};
+interface IAddProductProps {
+    navigation: NativeStackNavigationProp<RootStackParamList>
+}
 
-const AddProduct = ({ navigation }) => {
+const AddProduct: FC<IAddProductProps> = ({ navigation }) => {
   const [isAlreadySubmitted, setSubmitted] = useState(false)
   const dispatch = useAppDispatch()
   const products  = useAppSelector(state => state.app.products)
@@ -47,29 +47,17 @@ const AddProduct = ({ navigation }) => {
       >
         {({ handleChange, handleBlur, handleSubmit, values, errors }) => (
           <View style={styles.formContainer}>
-            <CustomTextInput
-                name="productName"
-                title='Enter product name'
-                handleChange={handleChange}
-                value={values.productName}
-                error={errors.productName}
-            />
-             <CustomTextInput
-                name="productPrice"
-                title='Enter product price'
-                handleChange={handleChange}
-                value={values.productPrice}
-                error={errors.productPrice}
-                num
-            />
-            <CustomTextInput
-                name="productDescription"
-                title='Enter product description'
-                handleChange={handleChange}
-                value={values.productDescription}
-                error={errors.productDescription}
-                textarea
-            />
+            {productsFormConfig.map((item) => (
+                <CustomTextInput
+                    name={item.name}
+                    title={item.title}
+                    handleChange={handleChange}
+                    value={values[item.name]}
+                    error={errors[item.name]}
+                    textarea={item.textarea}
+                    num={item.num}
+                />
+            ))}
             <Button onPress={() => {
                 setSubmitted(true)
                 handleSubmit()
@@ -93,4 +81,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default AddProduct;
+export default memo(AddProduct);

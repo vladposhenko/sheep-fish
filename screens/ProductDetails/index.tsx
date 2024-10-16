@@ -6,10 +6,6 @@ import { useRoute } from "@react-navigation/native";
 
 const noImage = require("../../assets/noImage.png");
 
-type IProps = {
-  item: IProductItem;
-};
-
 const ProductDetails = () => {
   const dispatch = useAppDispatch();
   const route = useRoute();

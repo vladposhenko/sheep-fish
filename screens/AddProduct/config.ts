@@ -17,3 +17,20 @@ export const validationSchema = Yup.object().shape({
       .min(10, 'Description must be at least 10 characters')
       .max(300, 'Description must be no more than 300 characters')
   });
+
+export const productsFormConfig = [
+  {
+    name: "productName",
+    title: 'Enter product name'
+  },
+  {
+    name: "productPrice",
+    title: 'Enter product price',
+    num: true
+  },
+  {
+    name: "productDescription",
+    title: 'Enter product description',
+    textarea: true
+  }
+] 
